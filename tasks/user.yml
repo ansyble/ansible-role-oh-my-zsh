@@ -4,7 +4,6 @@
   sudo: yes
   with_items: oh_my_zsh_users
 
-
 - name: Oh-my-zsh | User
   command: "cp -R {{oh_my_zsh_tmp}} /home/{{item.name}}"
   with_items: oh_my_zsh_users
