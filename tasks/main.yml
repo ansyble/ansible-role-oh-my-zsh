@@ -1,40 +1,9 @@
 ---
-- stat: path="{{oh_my_zsh_tmp}}"
-  register: tmp_repo
+- include: packages.yml
+  tags: [oh-my-zsh, oh-my-zsh-packages]
 
-- name: Oh-my-zsh | Install packages
-  apt: name={{item}} state=latest update_cache=yes
-  with_items:
-      - zsh
-      - git
-  when: tmp_repo.stat.isdir is not defined
+- include: repo.yml
+  tags: [oh-my-zsh, oh-my-zsh-repo]
 
-- name: Oh-my-zsh | user shell
-  user: name={{item.name}} shell=/bin/zsh
-  sudo: yes
-  with_items: oh_my_zsh_users
-
-- name: Oh-my-zsh | Checkout github repo
-  git: >
-    repo=https://github.com/robbyrussell/oh-my-zsh.git
-    dest={{oh_my_zsh_tmp}}
-  when: tmp_repo.stat.isdir is not defined
-
-- name: Oh-my-zsh | User
-  command: "cp -R {{oh_my_zsh_tmp}} /home/{{item.name}}"
-  with_items: oh_my_zsh_users
-
-- name: Oh-my-zsh | Permissions
-  file: >
-    path="/home/{{item.name}}/.oh-my-zsh"
-    owner={{item.name}}
-    group={{item.name}}
-    state=directory
-  with_items: oh_my_zsh_users
-
-- name: Oh-my-zsh | Backup zshrc
-  sudo_user: "{{item.name}}"
-  template: >
-    src=zshrc.j2
-    dest="/home/{{item.name}}/.zshrc"
-  with_items: oh_my_zsh_users
+- include: user.yml
+  tags: [oh-my-zsh, oh-my-zsh-user]

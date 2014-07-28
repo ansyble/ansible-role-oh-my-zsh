@@ -1,0 +1,11 @@
+---
+- stat:
+    path="{{oh_my_zsh_tmp}}"
+  register: tmp_repo
+
+- name: Oh-my-zsh | Install packages
+  apt: name={{item}} state=latest update_cache=yes
+  with_items:
+      - zsh
+      - git
+  when: tmp_repo.stat.isdir is not defined

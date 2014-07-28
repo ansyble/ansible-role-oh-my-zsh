@@ -1,0 +1,25 @@
+---
+- name: Oh-my-zsh | user shell
+  user: name={{item.name}} shell=/bin/zsh
+  sudo: yes
+  with_items: oh_my_zsh_users
+
+
+- name: Oh-my-zsh | User
+  command: "cp -R {{oh_my_zsh_tmp}} /home/{{item.name}}"
+  with_items: oh_my_zsh_users
+
+- name: Oh-my-zsh | Permissions
+  file: >
+    path="/home/{{item.name}}/.oh-my-zsh"
+    owner={{item.name}}
+    group={{item.name}}
+    state=directory
+  with_items: oh_my_zsh_users
+
+- name: Oh-my-zsh | Backup zshrc
+  sudo_user: "{{item.name}}"
+  template: >
+    src=zshrc.j2
+    dest="/home/{{item.name}}/.zshrc"
+  with_items: oh_my_zsh_users

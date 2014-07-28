@@ -1,0 +1,10 @@
+---
+- stat:
+    path="{{oh_my_zsh_tmp}}"
+  register: tmp_repo
+
+- name: Oh-my-zsh | Checkout github repo
+  git: >
+    repo=https://github.com/robbyrussell/oh-my-zsh.git
+    dest={{oh_my_zsh_tmp}}
+  when: tmp_repo.stat.isdir is not defined
