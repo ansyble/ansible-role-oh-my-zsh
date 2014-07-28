@@ -1,5 +1,5 @@
 ---
-- stat: path="/tmp/.oh-my-zsh"
+- stat: path="{{oh_my_zsh_tmp}}"
   register: tmp_repo
 
 - name: Oh-my-zsh | Install packages
@@ -17,11 +17,11 @@
 - name: Oh-my-zsh | Checkout github repo
   git: >
     repo=https://github.com/robbyrussell/oh-my-zsh.git
-    dest=/tmp/.oh-my-zsh
+    dest={{oh_my_zsh_tmp}}
   when: tmp_repo.stat.isdir is not defined
 
 - name: Oh-my-zsh | User
-  command: "cp -R /tmp/.oh-my-zsh /home/{{item.name}}"
+  command: "cp -R {{oh_my_zsh_tmp}} /home/{{item.name}}"
   with_items: oh_my_zsh_users
 
 - name: Oh-my-zsh | Permissions
