@@ -3,7 +3,7 @@
     path="{{oh_my_zsh_tmp}}"
   register: tmp_repo
 
-- name: Oh-my-zsh | Install packages
+- name: Oh-my-zsh | Packages | Install
   apt: name={{item}} state=latest update_cache=yes
   with_items:
       - zsh

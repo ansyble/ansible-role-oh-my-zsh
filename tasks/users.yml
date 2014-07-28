@@ -1,14 +1,14 @@
 ---
-- name: Oh-my-zsh | user shell
+- name: Oh-my-zsh | Users | shell
   user: name={{item.name}} shell=/bin/zsh
   sudo: yes
   with_items: oh_my_zsh_users
 
-- name: Oh-my-zsh | User
+- name: Oh-my-zsh | Users | Setup
   command: "cp -R {{oh_my_zsh_tmp}} /home/{{item.name}}"
   with_items: oh_my_zsh_users
 
-- name: Oh-my-zsh | Permissions
+- name: Oh-my-zsh | Users | Permissions
   file: >
     path="/home/{{item.name}}/.oh-my-zsh"
     owner={{item.name}}
@@ -16,7 +16,7 @@
     state=directory
   with_items: oh_my_zsh_users
 
-- name: Oh-my-zsh | Backup zshrc
+- name: Oh-my-zsh | Users| Backup zshrc
   sudo_user: "{{item.name}}"
   template: >
     src=zshrc.j2

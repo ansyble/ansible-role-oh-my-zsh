@@ -5,5 +5,5 @@
 - include: repo.yml
   tags: [oh-my-zsh, oh-my-zsh-repo]
 
-- include: user.yml
-  tags: [oh-my-zsh, oh-my-zsh-user]
+- include: users.yml
+  tags: [oh-my-zsh, oh-my-zsh-users]
