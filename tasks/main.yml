@@ -21,8 +21,15 @@
   when: tmp_repo.stat.isdir is not defined
 
 - name: Oh-my-zsh | User
-  sudo_user: "{{item.name}}"
-  command: "cp -R /tmp/.oh-my-zsh /home/{{item.name}}/.oh-my-zsh"
+  command: "cp -R /tmp/.oh-my-zsh /home/{{item.name}}"
+  with_items: oh_my_zsh_users
+
+- name: Oh-my-zsh | Permissions
+  file: >
+    path="/home/{{item.name}}/.oh-my-zsh"
+    owner={{item.name}}
+    group={{item.name}}
+    state=directory
   with_items: oh_my_zsh_users
 
 - name: Oh-my-zsh | Backup zshrc
