@@ -1,28 +1,33 @@
 ---
-- stat: path="/home/{{ansible_ssh_user}}/.oh-my-zsh"
-  register: repo
+- stat: path="/tmp/.oh-my-zsh"
+  register: tmp_repo
 
-- name: Oh-my-zsh | Install zsh package
+- name: Oh-my-zsh | Install packages
   apt: name={{item}} state=latest update_cache=yes
   with_items:
       - zsh
       - git
-  when: repo.stat.isdir is not defined
+  when: tmp_repo.stat.isdir is not defined
 
 - name: Oh-my-zsh | user shell
-  user: name={{ansible_ssh_user}} shell=/bin/zsh
+  user: name={{item.name}} shell=/bin/zsh
   sudo: yes
-  when: repo.stat.isdir is not defined
+  with_items: oh_my_zsh_users
 
 - name: Oh-my-zsh | Checkout github repo
   git: >
     repo=https://github.com/robbyrussell/oh-my-zsh.git
-    dest=/home/{{ansible_ssh_user}}/.oh-my-zsh
-  when: repo.stat.isdir is not defined
+    dest=/tmp/.oh-my-zsh
+  when: tmp_repo.stat.isdir is not defined
+
+- name: Oh-my-zsh | User
+  sudo_user: "{{item.name}}"
+  command: "cp -R /tmp/.oh-my-zsh /home/{{item.name}}/.oh-my-zsh"
+  with_items: oh_my_zsh_users
 
 - name: Oh-my-zsh | Backup zshrc
-  sudo: no
-  template:
-    src: zshrc.j2
-    dest: "/home/{{ansible_ssh_user}}/.zshrc"
-
+  sudo_user: "{{item.name}}"
+  template: >
+    src=zshrc.j2
+    dest="/home/{{item.name}}/.zshrc"
+  with_items: oh_my_zsh_users
