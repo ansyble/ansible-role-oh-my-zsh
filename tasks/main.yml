@@ -1,0 +1,28 @@
+---
+- stat: path="/home/{{ansible_ssh_user}}/.oh-my-zsh"
+  register: repo
+
+- name: Oh-my-zsh | Install zsh package
+  apt: name={{item}} state=latest update_cache=yes
+  with_items:
+      - zsh
+      - git
+  when: repo.stat.isdir is not defined
+
+- name: Oh-my-zsh | user shell
+  user: name={{ansible_ssh_user}} shell=/bin/zsh
+  sudo: yes
+  when: repo.stat.isdir is not defined
+
+- name: Oh-my-zsh | Checkout github repo
+  git: >
+    repo=https://github.com/robbyrussell/oh-my-zsh.git
+    dest=/home/{{ansible_ssh_user}}/.oh-my-zsh
+  when: repo.stat.isdir is not defined
+
+- name: Oh-my-zsh | Backup zshrc
+  sudo: no
+  template:
+    src: zshrc.j2
+    dest: "/home/{{ansible_ssh_user}}/.zshrc"
+

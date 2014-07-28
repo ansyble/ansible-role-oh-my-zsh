@@ -1,0 +1,16 @@
+galaxy_info:
+  author: calvin
+  company: Aplazame
+  description: Installing and configuring the Oh My ZSH shell.
+  min_ansible_version: 1.4
+  license: MIT
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  categories:
+  - zsh
+  - oh-my-zsh
+  - shell
+
+dependencies: []
