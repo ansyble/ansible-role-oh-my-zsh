@@ -13,11 +13,13 @@
     owner={{item.name}}
     group={{item.name}}
     state=directory
+    recurse=yes
   with_items: oh_my_zsh_users
 
-- name: Oh-my-zsh | Users| Backup zshrc
-  sudo_user: "{{item.name}}"
+- name: Oh-my-zsh | Users | Backup zshrc
   template: >
     src=zshrc.j2
     dest="~{{item.name}}/.zshrc"
+    owner={{item.name}}
+    group={{item.name}}
   with_items: oh_my_zsh_users
