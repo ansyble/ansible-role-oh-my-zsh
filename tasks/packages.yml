@@ -1,14 +1,14 @@
 ---
-- stat:
-    path: "{{ oh_my_zsh_tmp }}"
-  register: tmp_repo
-
-- name: Oh-my-zsh | Packages | Install
+- name: packages | install
   apt:
     name: "{{ item }}"
     state: latest
-    update_cache=: yes
+    update_cache: yes
   with_items:
       - zsh
       - git
-  when: tmp_repo.stat.isdir is not defined
+
+- name: packages | github repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ oh_my_zsh_tmp }}"

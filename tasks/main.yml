@@ -2,8 +2,11 @@
 - include: packages.yml
   tags: [oh-my-zsh, oh-my-zsh-packages]
 
-- include: repo.yml
-  tags: [oh-my-zsh, oh-my-zsh-repo]
-
 - include: users.yml
   tags: [oh-my-zsh, oh-my-zsh-users]
+
+- include: themes.yml
+  tags: [oh-my-zsh, oh-my-zsh-themes]
+
+- include: plugins.yml
+  tags: [oh-my-zsh, oh-my-zsh-plugins]
