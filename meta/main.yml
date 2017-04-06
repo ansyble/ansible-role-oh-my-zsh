@@ -1,6 +1,6 @@
 galaxy_info:
-  author: calvin
-  company: Aplazame
+  author: mongkok
+  company: defocus.io
   description: Installing and configuring the Oh My ZSH shell.
   min_ansible_version: 1.4
   license: MIT
