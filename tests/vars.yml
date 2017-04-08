@@ -1,3 +1,11 @@
 ---
 oh_my_zsh_users:
   - name: root
+
+oh_my_zsh_plugins:
+  test_plugin: |
+    export TEST=1
+
+oh_my_zsh_themes:
+  test_theme: |
+    TEST=1
