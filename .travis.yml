@@ -28,7 +28,7 @@ script:
   - ansible-playbook tests/playbook.yml -i inventory --syntax-check
 
   # Play test
-  - ansible-playbook tests/playbook.yml -i inventory --connection=local
+  - ansible-playbook tests/playbook.yml -i inventory --connection=local --sudo
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
