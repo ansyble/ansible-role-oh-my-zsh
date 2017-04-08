@@ -18,7 +18,7 @@ galaxy_info:
     - all
   galaxy_tags:
   - zsh
-  - oh-my-zsh
+  - ohmyzsh
   - shell
 
 dependencies: []
