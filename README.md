@@ -17,8 +17,8 @@ ansible-galaxy install ansyble.oh-my-zsh
 oh_my_zsh_users:
   - name: root
 
-  - name: mongkok
-    theme: pyzsh
+  - name: me
+    theme: demo
     plugins: git
 ```
 
@@ -38,9 +38,9 @@ oh_my_zsh_plugins:
 **Themes**
 ```yml
 oh_my_zsh_themes:
-  pyzsh: |
+  demo: |
     local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-    PROMPT=${PYZSH_PROMPT:-'${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'}
+    PROMPT=${DEMO_PROMPT:-'${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'}
 
     ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
