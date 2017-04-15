@@ -19,7 +19,8 @@ oh_my_zsh_users:
 
   - name: me
     theme: demo
-    plugins: git
+    plugins:
+      - custom_virtualenv
 ```
 
 **Plugins**

@@ -2,3 +2,16 @@
 oh_my_zsh_tmp: /tmp/.oh-my-zsh
 oh_my_zsh_plugins: {}
 oh_my_zsh_themes: {}
+oh_my_zsh_default_plugins:
+  - cp
+  - command-not-found
+  - git
+  - git-extras
+  - gnu-utils
+  - history
+  - pip
+  - python
+  - ruby
+  - screen
+  - ssh-agent
+  - svn
