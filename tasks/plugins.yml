@@ -1,18 +1,20 @@
 ---
 - name: plugins | ensures plugin dir exists
   file:
-    path: "~{{ item[0].name }}/.oh-my-zsh/plugins/{{ item[1] }}"
+    path: "~{{ item.0.name }}/.oh-my-zsh/plugins/{{ item.1 }}"
     state: directory
-    owner: "{{ item[0].name }}"
-  with_nested:
+    owner: "{{ item.0.name }}"
+  with_subelements:
     - "{{ oh_my_zsh_users }}"
-    - "{{ oh_my_zsh_plugins.keys() }}"
+    - plugins
+    - skip_missing: yes
 
 - name: plugins | create
   copy:
-    content: "{{ oh_my_zsh_plugins[item[1]] }}"
-    dest: "~{{ item[0].name }}/.oh-my-zsh/plugins/{{ item[1] }}/{{ item[1] }}.plugin.zsh"
-    owner: "{{ item[0].name }}"
-  with_nested:
+    content: "{{ oh_my_zsh_plugins[item.1] }}"
+    dest: "~{{ item.0.name }}/.oh-my-zsh/plugins/{{ item.1 }}/{{ item.1 }}.plugin.zsh"
+    owner: "{{ item.0.name }}"
+  with_subelements:
     - "{{ oh_my_zsh_users }}"
-    - "{{ oh_my_zsh_plugins.keys() }}"
+    - plugins
+    - skip_missing: yes
