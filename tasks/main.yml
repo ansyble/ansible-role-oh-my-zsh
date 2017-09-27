@@ -1,12 +1,12 @@
 ---
-- include: packages.yml
+- import_tasks: packages.yml
   tags: [oh-my-zsh, oh-my-zsh-packages]
 
-- include: users.yml
+- import_tasks: users.yml
   tags: [oh-my-zsh, oh-my-zsh-users]
 
-- include: themes.yml
+- import_tasks: themes.yml
   tags: [oh-my-zsh, oh-my-zsh-themes]
 
-- include: plugins.yml
+- import_tasks: plugins.yml
   tags: [oh-my-zsh, oh-my-zsh-plugins]
